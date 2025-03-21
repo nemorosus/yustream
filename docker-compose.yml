@@ -1,0 +1,17 @@
+# Use an official Gradle image
+FROM gradle:7.4.2-jdk11 AS build
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the Gradle build files
+COPY build.gradle.kts settings.gradle.kts ./
+
+# Copy the source code
+COPY src ./src
+
+# Build the project
+RUN gradle build --no-daemon
+
+# Run the application (adjust if needed)
+CMD ["gradle", "run"]
